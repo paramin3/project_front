@@ -1,0 +1,40 @@
+<header>
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Khonkaen Dinokick Logo" />
+  </div>
+  <div class="hamburger" (click)="toggleMenu()">☰</div>
+  <nav>
+    <ul [class.show]="menuOpen">
+      <li><a routerLink="/home" (click)="closeMenu()" class="nav-button">หน้าหลัก</a></li>
+      <li><a routerLink="/about" (click)="closeMenu()" class="nav-button">เกี่ยวกับเรา</a></li>
+      <li><a routerLink="/classes" (click)="closeMenu()" class="nav-button">ตารางเรียน</a></li>
+      <li><a routerLink="/trainers" (click)="closeMenu()" class="nav-button">ครูผู้สอน</a></li>
+      <li><a routerLink="/membership" (click)="closeMenu()" class="nav-button">ข้อมูลนักกีฬา</a></li>
+      <li><a routerLink="/address-management" (click)="closeMenu()" class="nav-button">ข้อมูลที่อยู่</a></li>
+      <li><a routerLink="/shop" (click)="closeMenu()" class="nav-button">สินค้า</a></li>
+      <li><a routerLink="/cart" (click)="closeMenu()" class="nav-button btn-cart">ดูตะกร้าสินค้า</a></li>
+      <li><a routerLink="/my-orders" (click)="closeMenu()" class="nav-button">ดูคำสั่งซื้อของฉัน</a></li>
+      <li *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/login" (click)="closeMenu()" class="nav-button">เข้าสู่ระบบ</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()">
+        <a (click)="onLogoutAndCloseMenu()" class="nav-button logout-btn">ออกจากระบบ</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<router-outlet></router-outlet>
+
+
+<footer>
+  <div class="footer-contact">
+    <p>ติดต่อสอบถาม: 091-0185354</p>
+    <p>สนามกีฬาจังหวัดขอนแก่น ต.ในเมือง อ.เมืองขอนแก่น จ.ขอนแก่น 40000</p>
+    <p>Email: Ob1.charoen&#64;gmail.com</p>
+    <p>ทดลองเรียนฟรีก่อนได้ครับ</p>
+    <a href="https://www.facebook.com/profile.php?id=100063480371065" target="_blank">
+      <img src="assets/FBlogo.png" alt="Facebook" />
+    </a>
+  </div>
+</footer>

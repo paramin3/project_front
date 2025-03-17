@@ -1,0 +1,106 @@
+/* General Styling for About Section */
+#about {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+}
+
+#about h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+#about p {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+#about ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+#about ul li {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
+/* Styling for the Image with Link */
+#about-image-link {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#about-image-link a {
+    display: inline-block;
+}
+
+#about-image-link img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#about-image-link img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    #about {
+        padding: 3rem 1rem;
+    }
+
+    #about h2 {
+        font-size: 1.8rem;
+    }
+
+    #about p {
+        font-size: 1rem;
+    }
+
+    #about ul {
+        gap: 1rem;
+    }
+
+    #about ul li {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #about {
+        padding: 2rem 1rem;
+    }
+
+    #about h2 {
+        font-size: 1.5rem;
+    }
+
+    #about p {
+        font-size: 0.9rem;
+    }
+
+    #about ul {
+        gap: 0.5rem;
+    }
+
+    #about ul li {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}

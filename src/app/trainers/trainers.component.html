@@ -1,0 +1,14 @@
+<div class="trainers-page">
+    <h1>ครูผู้สอน</h1>
+    <div class="trainers-container">
+      <div *ngFor="let trainer of trainers" class="trainer-card">
+          <h3>{{ trainer.name }}</h3>
+          <p>Experience: {{ trainer.experience }}</p>
+          <p>Awards: {{ trainer.awards ? trainer.awards.join(', ') : 'No awards' }}</p>
+          <div *ngIf="trainer.image">
+              <img [src]="getImagePath(trainer.image)" [alt]="trainer.name" width="200" />
+          </div>
+      </div>
+    </div>
+  </div>
+  

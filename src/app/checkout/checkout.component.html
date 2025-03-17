@@ -1,0 +1,224 @@
+<!-- src/app/checkout/checkout.component.html -->
+<div id="checkout-form">
+  <h1>ชำระเงิน</h1>
+
+  <!-- Cart Items -->
+  <div id="order-summary">
+    <div *ngFor="let item of cartItems" class="order-item">
+      <img
+        *ngIf="item.product.imagePaths && item.product.imagePaths.length > 0"
+        [src]="'http://localhost:8081/uploads/images/products/' + item.product.imagePaths[0]"
+        [alt]="item.product.name"
+        class="product-image"
+        (error)="onImageError($event)"
+      />
+      <p>{{ item.product.name }} - {{ item.product.price | number:'1.2-2' }} ฿ x {{ item.quantity }}</p>
+    </div>
+  </div>
+
+  <h3 id="total-price">ราคารวม: {{ totalPrice | number:'1.2-2' }} ฿</h3>
+
+  <img src="assets/qr.jpg" alt="QrcodeImage" class="qr-code" />
+
+  <form #checkoutForm="ngForm" (ngSubmit)="submitOrder()">
+    <div class="form-group">
+      <label for="name">ชื่อ:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="orderDetails.name"
+        name="name"
+        placeholder="ชื่อ"
+        required
+      />
+      <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['name']?.valid" class="error-message">
+        <small>กรุณาใส่ชื่อ</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="surname">นามสกุล:</label>
+      <input
+        type="text"
+        id="surname"
+        [(ngModel)]="orderDetails.surname"
+        name="surname"
+        placeholder="นามสกุล"
+        required
+      />
+      <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['surname']?.valid" class="error-message">
+        <small>กรุณาใส่นามสกุล</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telephone">เบอร์โทร:</label>
+      <input
+        type="tel"
+        id="telephone"
+        [(ngModel)]="orderDetails.telephone"
+        name="telephone"
+        placeholder="เบอร์โทร"
+        required
+      />
+      <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['telephone']?.valid" class="error-message">
+        <small>กรุณาใส่เบอร์โทร</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="deliveryType">ประเภทการจัดส่ง:</label>
+      <select
+        id="deliveryType"
+        [(ngModel)]="orderDetails.deliveryType"
+        name="deliveryType"
+        (change)="handleDeliveryTypeChange()"
+        required
+      >
+        <option value="">เลือกประเภทการจัดส่ง</option>
+        <option value="pickup">รับของเอง</option>
+        <option value="shipping">การส่งสินค้า</option>
+      </select>
+      <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['deliveryType']?.valid" class="error-message">
+        <small>กรุณาเลือกประเภทการจัดส่ง</small>
+      </div>
+    </div>
+
+    <div id="shipping-fields" class="shipping-info" *ngIf="orderDetails.deliveryType === 'shipping'">
+      <div class="form-group">
+        <label for="saved-addresses">เลือกที่อยู่ที่บันทึกไว้:</label>
+        <select
+          id="saved-addresses"
+          [(ngModel)]="selectedAddressId"
+          name="savedAddresses"
+          (change)="handleSavedAddressChange()"
+        >
+          <option value="new">ป้อนที่อยู่ใหม่</option>
+          <option *ngFor="let address of savedAddresses" [value]="address.id">
+            {{ address.name }} - {{ address.homeAddress }}, {{ address.city }}, {{ address.district }}, {{ address.subDistrict }}, {{ address.road || '' }}, {{ address.soi || '' }}, {{ address.moo || '' }}, {{ address.postcode }}
+          </option>
+        </select>
+      </div>
+
+      <div id="new-address-fields" *ngIf="selectedAddressId === 'new'">
+        <div class="form-group">
+          <label for="homeAddress">บ้านเลขที่:</label>
+          <input
+            type="text"
+            id="homeAddress"
+            [(ngModel)]="newAddress.homeAddress"
+            name="homeAddress"
+            placeholder="บ้านเลขที่"
+            [required]="selectedAddressId === 'new'"
+          />
+          <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['homeAddress']?.valid" class="error-message">
+            <small>กรุณาใส่บ้านเลขที่</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postcode">รหัสไปรษณีย์:</label>
+          <input
+            type="text"
+            id="postcode"
+            [(ngModel)]="newAddress.postcode"
+            name="postcode"
+            placeholder="รหัสไปรษณีย์"
+            [required]="selectedAddressId === 'new'"
+          />
+          <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['postcode']?.valid" class="error-message">
+            <small>กรุณาใส่รหัสไปรษณีย์</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">จังหวัด:</label>
+          <input
+            type="text"
+            id="city"
+            [(ngModel)]="newAddress.city"
+            name="city"
+            placeholder="จังหวัด"
+            [required]="selectedAddressId === 'new'"
+          />
+          <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['city']?.valid" class="error-message">
+            <small>กรุณาใส่จังหวัด</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="district">อำเภอ:</label>
+          <input
+            type="text"
+            id="district"
+            [(ngModel)]="newAddress.district"
+            name="district"
+            placeholder="อำเภอ"
+            [required]="selectedAddressId === 'new'"
+          />
+          <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['district']?.valid" class="error-message">
+            <small>กรุณาใส่อำเภอ</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subDistrict">ตำบล:</label>
+          <input
+            type="text"
+            id="subDistrict"
+            [(ngModel)]="newAddress.subDistrict"
+            name="subDistrict"
+            placeholder="ตำบล"
+            [required]="selectedAddressId === 'new'"
+          />
+          <div *ngIf="checkoutForm.submitted && !checkoutForm.controls['subDistrict']?.valid" class="error-message">
+            <small>กรุณาใส่ตำบล</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="road">ถนน:</label>
+          <input
+            type="text"
+            id="road"
+            [(ngModel)]="newAddress.road"
+            name="road"
+            placeholder="ถนน"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="soi">ซอย:</label>
+          <input
+            type="text"
+            id="soi"
+            [(ngModel)]="newAddress.soi"
+            name="soi"
+            placeholder="ซอย"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="moo">หมู่:</label>
+          <input
+            type="text"
+            id="moo"
+            [(ngModel)]="newAddress.moo"
+            name="moo"
+            placeholder="หมู่"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="receipt">อัพโหลดใบเสร็จรับเงิน:</label>
+      <input type="file" id="receipt" (change)="onFileChange($event)" required />
+      <div *ngIf="receiptError" class="error-message">
+        <small>{{ receiptError }}</small>
+      </div>
+    </div>
+
+    <button id="submit-button" type="submit" [disabled]="isSubmitting">ยืนยันคำสั่งซื้อ</button>
+  </form>
+</div>

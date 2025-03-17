@@ -1,0 +1,172 @@
+<section id="membership">
+  <h2>กรอกข้อมูลนักกีฬา</h2>
+
+  <br />
+  <form
+    #memberForm="ngForm"
+    (ngSubmit)="submitMemberForm(memberForm)"
+    novalidate
+  >
+    <div class="form-group">
+      <label for="name">ชื่อ: </label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="member.name"
+        name="name"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['name'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่ชื่อ</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="surname">นามสกุล: </label>
+      <input
+        type="text"
+        id="surname"
+        [(ngModel)]="member.surname"
+        name="surname"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['surname'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่นามสกุล</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telephone">เบอร์โทร: </label>
+      <input
+        type="text"
+        id="telephone"
+        [(ngModel)]="member.telephone"
+        name="telephone"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['telephone'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่เบอร์โทร</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="thaiNationalId">บัตรประชาชน : </label>
+      <input
+        type="text"
+        id="thaiNationalId"
+        [(ngModel)]="member.thaiNationalId"
+        name="thaiNationalId"
+        required
+      />
+      <div
+        *ngIf="
+          memberForm.submitted && !memberForm.controls['thaiNationalId'].valid
+        "
+        class="error-message"
+      >
+        <small>กรุณาใส่บัตรประชาชน</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="weight">น้ำหนัก (kg): </label>
+      <input
+        type="number"
+        id="weight"
+        [(ngModel)]="member.weight"
+        name="weight"
+        min="0"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['weight'].valid"
+        class="error-message"
+      >
+        <small>Please enter a valid weight (kg).</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="height">ส่วนสูง (cm): </label>
+      <input
+        type="number"
+        id="height"
+        [(ngModel)]="member.height"
+        name="height"
+        min="0"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['height'].valid"
+        class="error-message"
+      >
+        <small>Please enter a valid height (cm).</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="belts">ลำดับสาย: </label>
+      <input
+        type="text"
+        id="belts"
+        [(ngModel)]="member.belts"
+        name="belts"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['belts'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่ลำดับ</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gym">ยิม: </label>
+      <input
+        type="text"
+        id="gym"
+        [(ngModel)]="member.gym"
+        name="gym"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['gym'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่ยิม</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">จังหวัด: </label>
+      <input
+        type="text"
+        id="city"
+        [(ngModel)]="member.city"
+        name="city"
+        required
+      />
+      <div
+        *ngIf="memberForm.submitted && !memberForm.controls['city'].valid"
+        class="error-message"
+      >
+        <small>กรุณาใส่จังหวัด</small>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button">ส่งข้อมูล</button>
+  </form>
+
+  <!-- Notification Area -->
+  <div id="toast-container"></div>
+</section>

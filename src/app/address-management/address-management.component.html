@@ -1,0 +1,55 @@
+<!-- src/app/address-management/address-management.component.html -->
+<h1>ข้อมูลที่อยู่</h1>
+
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <label for="name">ชื่อข้อมูลที่อยู่ (เช่น ที่บ้าน, ที่ทำงาน เป็นต้น):</label>
+  <input id="name" type="text" [(ngModel)]="addressForm.name" name="name" required>
+
+  <label for="homeAddress">บ้านเลขที่:</label>
+  <textarea id="homeAddress" [(ngModel)]="addressForm.homeAddress" name="homeAddress" required></textarea>
+
+  <label for="road">ถนน:</label>
+  <input id="road" type="text" [(ngModel)]="addressForm.road" name="road">
+
+  <label for="soi">ซอย:</label>
+  <input id="soi" type="text" [(ngModel)]="addressForm.soi" name="soi">
+
+  <label for="moo">หมู่:</label>
+  <input id="moo" type="text" [(ngModel)]="addressForm.moo" name="moo">
+
+  <label for="subDistrict">ตำบล:</label>
+  <input id="subDistrict" type="text" [(ngModel)]="addressForm.subDistrict" name="subDistrict" required>
+
+  <label for="district">อำเภอ:</label>
+  <input id="district" type="text" [(ngModel)]="addressForm.district" name="district" required>
+
+  <label for="city">จังหวัด:</label>
+  <input id="city" type="text" [(ngModel)]="addressForm.city" name="city" required>
+
+  <label for="postcode">รหัสไปรษณีย์:</label>
+  <input id="postcode" type="text" [(ngModel)]="addressForm.postcode" name="postcode" required>
+
+  <label for="isDefault">ตั้งเป็นค่าเริ่มต้น:</label>
+  <input id="isDefault" type="checkbox" [(ngModel)]="addressForm.isDefault" name="isDefault">
+
+  <button type="submit">บันทึก</button>
+  <button type="button" id="cancel-edit" (click)="resetForm()" *ngIf="editingAddressId">Cancel</button>
+</form>
+
+<h2>Existing Addresses</h2>
+<div id="address-list">
+  <div *ngFor="let address of addresses">
+    <h3>{{ address.name }}</h3>
+    <p>Home Address: {{ address.homeAddress }}</p>
+    <p>Road: {{ address.road || 'N/A' }}</p>
+    <p>Soi: {{ address.soi || 'N/A' }}</p>
+    <p>Moo: {{ address.moo || 'N/A' }}</p>
+    <p>Sub-District: {{ address.subDistrict }}</p>
+    <p>District: {{ address.district }}</p>
+    <p>City: {{ address.city }}</p>
+    <p>Postcode: {{ address.postcode }}</p>
+    <p>Default: {{ address.isDefault ? 'Yes' : 'No' }}</p>
+    <button (click)="editAddress(address.id!)">Edit</button>
+    <button (click)="deleteAddress(address.id!)">Delete</button>
+  </div>
+</div>

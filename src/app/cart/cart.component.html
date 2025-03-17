@@ -1,0 +1,41 @@
+<h1>ตะกร้าสินค้า</h1>
+<div class="cart-details-container">
+  <div *ngFor="let item of cartItems" class="cart-item">
+    <div class="product-info">
+      <img
+        [src]="'http://localhost:8081/uploads/images/products/' + item.product.imagePaths[0]"
+        alt="{{ item.product.name }}"
+        class="product-image"
+      />
+      <div class="product-details">
+        <h3>{{ item.product.name }}</h3>
+        <p class="price">{{ item.product.price }} บาท</p>
+      </div>
+      <div class="quantity-control">
+        <button (click)="adjustQuantity(item.product.id, -1)" [disabled]="item.quantity <= 1">-</button>
+        <input
+          type="number"
+          id="quantity-{{ item.product.id }}"
+          [value]="item.quantity"
+          min="1"
+          [max]="item.product.stock"
+          (input)="updateQuantity(item.product.id, getInputValue($event))"
+        />
+        <button
+          (click)="adjustQuantity(item.product.id, 1)"
+          [disabled]="item.quantity >= item.product.stock"
+        >+</button>
+      </div>
+    </div>
+    
+    <div class="stock-and-remove">
+      <p class="stock-info">สต็อก: <span [id]="'stock-' + item.product.id">{{ item.product.stock }}</span></p>
+      <button class="remove-button" (click)="removeProduct(item.product.id)">
+        นำสินค้าออก
+      </button>
+    </div>
+  </div>
+
+  <h3 id="total-price">ราคารวม: {{ totalPrice }} ฿</h3>
+  <button id="checkout-button" (click)="goToCheckout()">ชำระเงิน</button>
+</div>

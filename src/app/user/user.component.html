@@ -1,0 +1,8 @@
+<div *ngIf="currentUser; else notLoggedIn">
+    <p>Welcome, {{ currentUser }}</p>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <ng-template #notLoggedIn>
+    <p>Please log in to see user details.</p>
+  </ng-template>
+  

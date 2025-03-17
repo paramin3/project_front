@@ -1,0 +1,39 @@
+<section id="home">
+  <div class="home-content">
+    <h1>มาเป็นส่วนหนึ่งกับเรา Khonkaen Dinokick</h1>
+    <p>เข้าร่วมเรียนกับเราและฝึกฝนศิลปะเทควันโด</p>
+    <a routerLink="/register" class="btn">ลงทะเบียนตอนนี้</a>
+    <a routerLink="/about" class="btn btn-secondary">ดูเพิ่มเติม</a>
+  </div>
+</section>
+
+<section id="achievements-section">
+  <div class="achievements-section">
+    <h2>ข่าวสาร</h2>
+    <div class="achievements-container">
+      <div class="achievement-card" *ngFor="let achievement of achievements">
+        <img
+          *ngIf="achievement.imagePaths && achievement.imagePaths.length > 0"
+          [src]="
+            'http://localhost:8081/uploads/images/achievements/' +
+            achievement.imagePaths[0]
+          "
+          [alt]="achievement.name"
+          width="auto"
+          height="auto"
+        />
+        <h3>{{ achievement.title }}</h3>
+        <p><small>{{ achievement.createdAt | date: 'dd/MM/yyyy HH:mm' }}</small></p>
+        
+        
+        <div class="view-details">
+          <a
+            [routerLink]="['/achievement', achievement.id]"
+            class="btn btn-colored"
+            >ดูรายละเอียด</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

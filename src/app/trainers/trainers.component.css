@@ -1,0 +1,85 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: #1e3d59;
+    margin: 20px 0;
+    font-size: 2rem;
+}
+
+.trainers-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.trainers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.trainer-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    max-width: 300px;
+    flex: 1 1 calc(33.333% - 40px);
+    box-sizing: border-box;
+}
+
+.trainer-card h3 {
+    color: #1e3d59;
+    margin-bottom: 10px;
+}
+
+.trainer-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.trainer-card img {
+    margin-top: 10px;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .trainer-card {
+        flex: 1 1 calc(50% - 40px);
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .trainer-card {
+        flex: 1 1 100%;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .trainer-card p {
+        font-size: 0.9rem;
+    }
+}

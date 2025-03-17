@@ -1,0 +1,43 @@
+<section id="shop">
+  <h2>สินค้า</h2>
+  <div class="products">
+    <div class="product" *ngFor="let product of products">
+      <img
+        *ngIf="product.imagePaths && product.imagePaths.length > 0"
+        [src]="'http://localhost:8081/uploads/images/products/' + product.imagePaths[0]"
+        [alt]="product.name"
+        class="product-image"
+      />
+      <h3>{{ product.name }}</h3>
+      <p>ราคา {{ product.price }} บาท</p>
+      <p>สต็อก: <span [id]="'stock-' + product.id">{{ product.stock }}</span></p>
+
+      <div class="product-actions">
+        <label for="quantity-{{ product.id }}">จำนวน:</label>
+        <input
+          type="number"
+          [(ngModel)]="product.quantity"
+          [attr.id]="'quantity-' + product.id"
+          min="1"
+          [max]="product.stock"
+          [value]="product.quantity || 1"
+          class="quantity-input"
+          [disabled]="product.stock === 0"
+        />
+        <button
+          (click)="addToCart(product.id, product.quantity || 1)"
+          [disabled]="product.stock === 0"
+          class="cart-button"
+        >
+          เพิ่มสินค้า
+        </button>
+      </div>
+
+      <div class="view-details">
+        <a [routerLink]="['/shop', product.id]" class="btn btn-colored">
+          ดูรายละเอียด
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

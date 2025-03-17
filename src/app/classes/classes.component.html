@@ -1,0 +1,12 @@
+<section id="classes">
+  <h2>ตารางเรียน</h2>
+  <div class="class-categories">
+    <div class="class-category" *ngFor="let classItem of classes">
+      <h3>{{ classItem.name }}</h3>
+      <p>{{ classItem.description }}</p>
+      <p>ราคา {{ classItem.price }} บาท</p>
+      <p>เวลา: {{ classItem.schedule }}</p>
+    </div>
+  </div>
+</section>
+
