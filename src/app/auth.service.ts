@@ -7,9 +7,11 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:8081/api/users/login';
-  private logoutUrl = 'http://localhost:8081/api/users/logout';
-  private userDetailsUrl = 'http://localhost:8081/api/users/current-user';
+private baseUrl = 'https://adorable-freedom-production.up.railway.app';
+
+private loginUrl = `${this.baseUrl}/api/users/login`;
+private logoutUrl = `${this.baseUrl}/api/users/logout`;
+private userDetailsUrl = `${this.baseUrl}/api/users/current-user`;
   private loggedIn: boolean = false;
   private userEmail: string = '';
 
