@@ -1,14 +1,14 @@
-// src/app/address-management/address.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address } from './address.model';
+import { environment } from './environment'; // << ปรับ path ตามโครงสร้างจริงของโปรเจกต์
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddressService {
-  private apiUrl = 'http://localhost:8081/api/addresses';
+  private apiUrl = `${environment.apiBaseUrl}/api/addresses`;
 
   constructor(private http: HttpClient) {}
 
