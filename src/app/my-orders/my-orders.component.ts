@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-my-orders',
@@ -14,7 +15,7 @@ export class MyOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     // เรียก API เพื่อดึง email
-    this.http.get<any>('/api/users/current-user').subscribe({
+   this.http.get<any>(`${environment.apiBaseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
       next: (user) => {
         this.currentEmail = user.email; // ดึง email จาก response
         console.log('Current email:', this.currentEmail);
@@ -35,7 +36,7 @@ export class MyOrdersComponent implements OnInit {
     }
 
     // เรียก API เพื่อดึงคำสั่งซื้อโดยใช้ email
-    this.http.get<any[]>('/api/orders/user/' + email).subscribe({
+    this.http.get<any[]>(`${environment.apiBaseUrl}/api/orders/user/${email}`, { withCredentials: true }).subscribe({
       next: (orders) => {
         if (Array.isArray(orders)) {
           this.orders = orders; // Assign only if the data is an array
