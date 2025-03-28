@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 
-const distFolder = path.join(__dirname, 'dist', 'project');
+const distFolder = path.join(process.cwd(), 'dist', 'project');
 
 app.use(express.static(distFolder));
 
