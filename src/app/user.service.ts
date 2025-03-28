@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators'; 
+import { environment } from './environment';
 
 interface LoginResponse {
   message: string;
@@ -13,7 +14,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = environment.apiBaseUrl;
   private loginStatusSubject = new BehaviorSubject<boolean>(this.hasValidToken());
   public loginStatus$ = this.loginStatusSubject.asObservable();
 
