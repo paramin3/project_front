@@ -10,7 +10,8 @@ import { environment } from '../environment';
 export class UserComponent implements OnInit {
   currentUser: string | null = null;
   errorMessage: string | null = null;
-
+  
+ private baseUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
