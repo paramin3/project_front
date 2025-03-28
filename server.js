@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs'); // เพิ่ม fs เพื่อตรวจสอบไฟล์
+const fs = require('fs');
 const app = express();
 
-const distPath = path.join(__dirname, 'dist', 'project');
+// เปลี่ยนจาก dist/project เป็น dist/project/browser
+const distPath = path.join(__dirname, 'dist', 'project', 'browser');
 console.log('Dist path:', distPath);
 
-// ตรวจสอบว่าโฟลเดอร์มีอยู่จริงหรือไม่
 if (fs.existsSync(distPath)) {
   console.log('Dist folder exists. Files:', fs.readdirSync(distPath));
 } else {
