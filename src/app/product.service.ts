@@ -9,7 +9,7 @@ import { environment } from './environment';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = `${environment.apiBaseUrl}/api/products`; // สำหรับสินค้า
+  private apiUrl = `${environment.apiBaseUrl}/api/products`; // สำหรับสินค้า
   private cartUrl = `${environment.apiBaseUrl}/api/cart`; // สำหรับ Cart
 
   constructor(private http: HttpClient) {}
