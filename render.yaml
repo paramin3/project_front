@@ -2,7 +2,7 @@ services:
   - type: web
     name: angular-app
     env: static
-    buildCommand: npm install && npm run build
+    buildCommand: npm run build -- --base-href=/ --configuration=production
     staticPublishPath: dist/project
     routes:
       - type: rewrite
