@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from './environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AchievementService {
-  private baseUrl = 'http://localhost:8081/api/achievements'; // URL API
+ private baseUrl = `${environment.apiBaseUrl}/api/achievements`; // URL API
 
   constructor(private http: HttpClient) {}
 
