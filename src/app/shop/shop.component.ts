@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
 import { Router } from '@angular/router';
-
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-shop',
@@ -21,7 +21,10 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
   }
-
+  
+getImageUrl(filename: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/products/${filename}`;
+}
   // Load products from the backend and filter only available products
   loadProducts(): void {
     this.productService.getProducts().subscribe({
