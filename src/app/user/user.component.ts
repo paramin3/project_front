@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
     });
   }
   getCurrentUser(): void {
-    this.http.get<string>(`${this.baseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
+     this.http.get<string>(`${this.baseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
       next: (username) => {
         this.currentUser = username;
       },
