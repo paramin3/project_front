@@ -8,7 +8,7 @@ import { environment } from './environment';
   providedIn: 'root'
 })
 export class AuthService {
-private baseUrl = environment.apiUrl;
+private baseUrl = environment.apiBaseUrl;
 
   private loginUrl = `${this.baseUrl}/api/users/login`;
   private logoutUrl = `${this.baseUrl}/api/users/logout`;
