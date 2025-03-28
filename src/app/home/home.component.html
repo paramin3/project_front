@@ -12,16 +12,13 @@
     <h2>ข่าวสาร</h2>
     <div class="achievements-container">
       <div class="achievement-card" *ngFor="let achievement of achievements">
-        <img
-          *ngIf="achievement.imagePaths && achievement.imagePaths.length > 0"
-          [src]="
-            'http://localhost:8081/uploads/images/achievements/' +
-            achievement.imagePaths[0]
-          "
-          [alt]="achievement.name"
-          width="auto"
-          height="auto"
-        />
+<img
+  *ngIf="achievement.imagePaths && achievement.imagePaths.length > 0"
+  [src]="getImagePath(achievement.imagePaths[0])"
+  [alt]="achievement.name"
+  width="auto"
+  height="auto"
+/>
         <h3>{{ achievement.title }}</h3>
         <p><small>{{ achievement.createdAt | date: 'dd/MM/yyyy HH:mm' }}</small></p>
         
