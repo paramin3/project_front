@@ -10,6 +10,6 @@ export class ClassService {
   constructor(private http: HttpClient) {}
 
   getClasses(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.baseUrl);
   }
 }
