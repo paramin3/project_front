@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from './product.model'; // นำเข้า Product model ที่คุณสร้างไว้
+import { environment } from './environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8081/api/products'; // URL ของ API สำหรับสินค้า
-  private cartUrl = 'http://localhost:8081/api/cart'; // URL ของ API สำหรับ Cart
+  private baseUrl = `${environment.apiBaseUrl}/api/products'; // URL ของ API สำหรับสินค้า
+   private baseUrl = `${environment.apiBaseUrl}/api/cart'; // URL ของ API สำหรับ Cart
 
   constructor(private http: HttpClient) {}
 
