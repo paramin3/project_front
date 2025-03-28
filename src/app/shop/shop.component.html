@@ -2,12 +2,12 @@
   <h2>สินค้า</h2>
   <div class="products">
     <div class="product" *ngFor="let product of products">
-      <img
-        *ngIf="product.imagePaths && product.imagePaths.length > 0"
-        [src]="'http://localhost:8081/uploads/images/products/' + product.imagePaths[0]"
-        [alt]="product.name"
-        class="product-image"
-      />
+   <img
+  *ngIf="product.imagePaths && product.imagePaths.length > 0"
+  [src]="getImageUrl(product.imagePaths[0])"
+  [alt]="product.name"
+  class="product-image"
+/>
       <h3>{{ product.name }}</h3>
       <p>ราคา {{ product.price }} บาท</p>
       <p>สต็อก: <span [id]="'stock-' + product.id">{{ product.stock }}</span></p>
