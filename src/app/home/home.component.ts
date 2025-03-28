@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'; 
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   achievements: any[] = [];
-
+  
+getImagePath(imagePath: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
+}
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
