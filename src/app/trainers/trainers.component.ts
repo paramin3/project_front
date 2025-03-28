@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainerService } from '../trainer.service';
-
+import { environment } from '../environment';
 @Component({
   selector: 'app-trainers',
   templateUrl: './trainers.component.html',
@@ -26,10 +26,10 @@ export class TrainersComponent implements OnInit {
     });
   }
 
-  getImagePath(imagePath: string): string {
+   getImagePath(imagePath: string): string {
     return imagePath
-      ? `http://localhost:8081/uploads/images/trainers/${imagePath}`
-      : '/assets/images/default-trainer.png'; // Fallback to a default image
+      ? `${environment.apiBaseUrl}/uploads/images/trainers/${imagePath}`
+      : '/assets/images/default-trainer.png';
   }
 
 }
