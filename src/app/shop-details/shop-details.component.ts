@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-shop-details',
@@ -19,7 +20,7 @@ export class ShopDetailsComponent implements OnInit {
 
   loadProductDetails(id: string | null): void {
     if (id) {
-      this.http.get(`/api/products/${id}`).subscribe({
+      this.http.get(`${environment.apiBaseUrl}/api/products/${id}`).subscribe({
         next: (data) => {
           this.product = data;
         },
