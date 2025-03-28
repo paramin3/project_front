@@ -7,7 +7,7 @@ import { environment } from './environment';
   providedIn: 'root',
 })
 export class TrainerService {
-  private baseUrl = `${environment.apiBaseUrl}/api/trainers';
+  private baseUrl = `${environment.apiBaseUrl}/api/trainers`;
 
   constructor(private http: HttpClient) {}
 
