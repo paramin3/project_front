@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service'; // Adjust path as necessary
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-membership',
@@ -50,7 +51,7 @@ export class MembershipComponent implements OnInit {
   
   loadMemberData(): void {
     console.log('Loading member data from backend');
-    this.http.get('/api/members/current').subscribe({
+    this.http.get(`${environment.apiBaseUrl}/api/members/current`, { withCredentials: true }).subscribe({
       next: (response: any) => {
         console.log('Member data from backend:', response);
         this.member = response;
@@ -64,13 +65,13 @@ export class MembershipComponent implements OnInit {
 
   submitMemberForm(form: NgForm): void {
     // Check if the user is logged in
-    this.http.get<{ email: string }>('/api/users/current-user').subscribe({
+     this.http.get<{ email: string }>(`${environment.apiBaseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
       next: (userResponse) => {
         console.log('Current user:', userResponse.email);
 
         // Validate form and submit
         if (form.valid) {
-          this.http.post('/api/members/current', this.member).subscribe({
+         this.http.post(`${environment.apiBaseUrl}/api/members/current`, this.member, { withCredentials: true }).subscribe({
             next: (response) => {
               console.log('Member form submitted successfully:', response);
 
