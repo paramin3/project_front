@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './environment';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +17,7 @@ export class UserComponent implements OnInit {
     this.getCurrentUser();
   }
   logout(): void {
-    this.http.post('http://localhost:8081/api/users/logout', {}, { withCredentials: true }).subscribe({
+    this.http.post(`${this.baseUrl}/api/users/logout', {}, { withCredentials: true }).subscribe({
       next: () => {
         this.currentUser = null;
         alert('Logged out successfully');
@@ -27,7 +28,7 @@ export class UserComponent implements OnInit {
     });
   }
   getCurrentUser(): void {
-    this.http.get<string>('http://localhost:8081/api/users/current-user', { withCredentials: true }).subscribe({
+    this.http.get<string>(`${this.baseUrl}/api/users/current-user', { withCredentials: true }).subscribe({
       next: (username) => {
         this.currentUser = username;
       },
