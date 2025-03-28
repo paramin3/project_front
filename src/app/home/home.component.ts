@@ -10,9 +10,6 @@ import { environment } from '../environment';
 export class HomeComponent implements OnInit {
   achievements: any[] = [];
   
-getImagePath(imagePath: string): string {
-  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
-}
   
   constructor(private http: HttpClient) {}
 
@@ -40,7 +37,7 @@ getImagePath(imagePath: string): string {
     });
   }
 
-  getImagePath(imagePath: string): string {
-    return `/uploads/images/achievements/${imagePath}`;
-  }
+getImagePath(imagePath: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
+}
 }
