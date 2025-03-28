@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterComponent {
     }
 
     const registerData = { email: this.email, password: this.password };
-    this.http.post('http://localhost:8081/api/users/register', registerData).subscribe({
+    this.http.post(`${environment.apiBaseUrl}/api/users/register`, registerData).subscribe({
       next: () => {
         alert('การลงทะเบียนสำเร็จ');
         this.router.navigate(['/login']);
