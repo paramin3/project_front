@@ -5,9 +5,8 @@ import { environment } from './environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ClassService {
-  private baseUrl = `${environment.apiBaseUrl}/api/classes'; // URL ของ API
-
+export class ClassService { 
+  private baseUrl = `${environment.apiBaseUrl}/api/classes`;
   constructor(private http: HttpClient) {}
 
   getClasses(): Observable<any[]> {
