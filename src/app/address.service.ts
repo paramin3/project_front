@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address } from './address.model';
-import { environment } from './environment'; // << ปรับ path ตามโครงสร้างจริงของโปรเจกต์
+import { environment } from './environment'; 
 
 @Injectable({
   providedIn: 'root'
