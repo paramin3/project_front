@@ -8,8 +8,8 @@ import { environment } from './environment';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = `${environment.apiBaseUrl}/api/products'; // URL ของ API สำหรับสินค้า
-   private baseUrl = `${environment.apiBaseUrl}/api/cart'; // URL ของ API สำหรับ Cart
+  private baseUrl = `${environment.apiBaseUrl}/api/products`; // URL ของ API สำหรับสินค้า
+   private baseUrl = `${environment.apiBaseUrl}/api/cart`; // URL ของ API สำหรับ Cart
 
   constructor(private http: HttpClient) {}
 
