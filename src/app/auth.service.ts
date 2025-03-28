@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from './environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-private baseUrl = 'https://adorable-freedom-production.up.railway.app';
+private baseUrl = environment.apiUrl;
 
-private loginUrl = `${this.baseUrl}/api/users/login`;
-private logoutUrl = `${this.baseUrl}/api/users/logout`;
-private userDetailsUrl = `${this.baseUrl}/api/users/current-user`;
+  private loginUrl = `${this.baseUrl}/api/users/login`;
+  private logoutUrl = `${this.baseUrl}/api/users/logout`;
+  private userDetailsUrl = `${this.baseUrl}/api/users/current-user`;
+  
   private loggedIn: boolean = false;
   private userEmail: string = '';
 
