@@ -12,7 +12,11 @@ export class ShopDetailsComponent implements OnInit {
   product: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
-
+  
+getImageUrl(filename: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/products/${filename}`;
+}
+  
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.loadProductDetails(id);
