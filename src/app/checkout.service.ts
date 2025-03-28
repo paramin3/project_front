@@ -6,7 +6,7 @@ import { environment } from './environment';
   providedIn: 'root'
 })
 export class CheckoutService {
-  private baseUrl = `${environment.apiBaseUrl}/api/orders';
+  private baseUrl = `${environment.apiBaseUrl}/api/orders`;
 
   constructor(private http: HttpClient) {}
 
