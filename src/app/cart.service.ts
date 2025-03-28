@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CartItem } from './cart-item.model'; // Ensure the path is correct
+import { environment } from './environment';
 
 /**
  * Error Interceptor to catch HTTP errors globally
@@ -34,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   providedIn: 'root',
 })
 export class CartService {
-  private baseUrl = 'http://localhost:8081/api/cart';
+  private baseUrl = `${environment.apiBaseUrl}/api/cart`;
 
   constructor(private http: HttpClient) {}
 
