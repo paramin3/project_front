@@ -4,6 +4,7 @@ import { CartItem } from '../cart-item.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../product.service';
+import { environment } from '../environment'; 
 
 @Component({
   selector: 'app-cart',
@@ -116,7 +117,7 @@ export class CartComponent implements OnInit {
   
   goToCheckout(): void {
     // ตรวจสอบสถานะการล็อกอิน
-    this.http.get<{ email: string }>('/api/users/current-user').subscribe({
+    this.http.get<{ email: string }>(`${environment.apiBaseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
       next: (response) => {
         console.log('Current user:', response.email);
   
