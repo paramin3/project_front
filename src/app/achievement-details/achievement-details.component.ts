@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { ActivatedRoute } from '@angular/router';
 import { AchievementService } from '../achievement.service';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-achievement-details',
@@ -9,7 +10,10 @@ import { AchievementService } from '../achievement.service';
 })
 export class AchievementDetailsComponent implements OnInit {
   achievement: any;
-
+  
+getAchievementImageUrl(imagePath: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
+}
   constructor(
     private route: ActivatedRoute,
     private achievementService: AchievementService
