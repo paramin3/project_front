@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core'; 
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';  
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { environment } from './environment';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +14,14 @@ export class AchievementService {
     console.log('Base URL in AchievementService:', this.baseUrl);
   }
 
-  getAchievementById(id: string): Observable<any> {
+  getAchievementById(id: string): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${this.baseUrl}/${id}`, {
-      withCredentials: true 
+      withCredentials: true,
+      observe: 'response',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
     }).pipe(
       catchError(error => {
         console.error('Raw error from API:', error);
