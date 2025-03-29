@@ -10,7 +10,12 @@ export class AchievementService {
 
   constructor(private http: HttpClient) {}
 
-  getAchievementById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
-  }
+getAchievementById(id: string): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
+    catchError(error => {
+      console.error('Raw error from API:', error);
+      return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
+    })
+  );
+}
 }
