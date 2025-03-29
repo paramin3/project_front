@@ -36,7 +36,10 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('checkoutForm') checkoutForm!: NgForm;
   @ViewChild('shippingFields') shippingFields!: ElementRef<HTMLElement>;
   @ViewChild('newAddressFields') newAddressFields!: ElementRef<HTMLElement>;
-
+  
+getProductImageUrl(imagePath: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/products/${imagePath}`;
+}
   orderDetails = {
     name: '',
     surname: '',
