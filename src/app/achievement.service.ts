@@ -9,17 +9,18 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AchievementService {
- private baseUrl = `${environment.apiBaseUrl}/api/achievements`; // URL API
+  private baseUrl = `${environment.apiBaseUrl}/api/achievements`;
 
   constructor(private http: HttpClient) {
-  console.log('API Base URL:', this.baseUrl);
-}
-getAchievementById(id: string): Observable<any> {
-  return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
-    catchError(error => {
-      console.error('Raw error from API:', error);
-      return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
-    })
-  );
-}
+    console.log(' API Base URL:', this.baseUrl);
+  }
+
+  getAchievementById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
+      catchError(error => {
+        console.error('Raw error from API:', error);
+        return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
+      })
+    );
+  }
 }
