@@ -3,7 +3,7 @@
   <div *ngFor="let item of cartItems" class="cart-item">
     <div class="product-info">
       <img
-        [src]="'http://localhost:8081/uploads/images/products/' + item.product.imagePaths[0]"
+         [src]="getProductImageUrl(item.product.imagePaths[0])"
         alt="{{ item.product.name }}"
         class="product-image"
       />
