@@ -9,20 +9,16 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AchievementService {
-  // Use direct backend URL for testing
-  private baseUrl = 'https://adorable-freedom-production.up.railway.app/api/achievements';
-  
-  constructor(private http: HttpClient) {
-    console.log('Environment API URL:', environment.apiBaseUrl);
-    console.log('Using direct API URL:', this.baseUrl);
-  }
-  
-  getAchievementById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
-      catchError(error => {
-        console.error('Raw error from API:', error);
-        return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
-      })
-    );
-  }
+ private baseUrl = `${environment.apiBaseUrl}/api/achievements`; // URL API
+
+  constructor(private http: HttpClient) {}
+
+getAchievementById(id: string): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
+    catchError(error => {
+      console.error('Raw error from API:', error);
+      return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
+    })
+  );
+}
 }
