@@ -11,7 +11,12 @@ import { throwError } from 'rxjs';
 export class AchievementService {
   private baseUrl = `${environment.apiBaseUrl}/api/achievements`;
 
- constructor(private http: HttpClient) {}
+ constructor(private http: HttpClient) {
+  setTimeout(() => {
+    console.log(' API Base URL:', this.baseUrl);
+  }, 0);
+}
+
 
   getAchievementById(id: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
