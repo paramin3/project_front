@@ -11,6 +11,6 @@ export class AchievementService {
   constructor(private http: HttpClient) {}
 
   getAchievementById(id: string): Observable<any> {
-    return this.http.get<Achievement>(`${this.baseUrl}/${id}`, { withCredentials: true });
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 }
