@@ -10,10 +10,11 @@ import { environment } from '../environment';
 })
 export class AchievementDetailsComponent implements OnInit {
   achievement: any;
-  
-getAchievementImageUrl(imagePath: string): string {
-  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
-}
+
+  getAchievementImageUrl(imagePath: string): string {
+    return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private achievementService: AchievementService
@@ -21,16 +22,20 @@ getAchievementImageUrl(imagePath: string): string {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('Achievement ID:', id); // ตรวจสอบ ID
+    console.log('Achievement ID:', id);
 
     if (id) {
       this.achievementService.getAchievementById(id).subscribe({
-        next: (data) => {
-          console.log('Achievement Data:', data); // ตรวจสอบข้อมูล
-          this.achievement = {
-            ...data,
-            createdAt: new Date(data.createdAt) // แปลง createdAt เป็น Date object
-          };
+        next: (res) => {
+          if (res.body) {
+            console.log('Achievement Data:', res.body);
+            this.achievement = {
+              ...res.body,
+              createdAt: new Date(res.body.createdAt)
+            };
+          } else {
+            console.warn(' No data in response (likely 304 Not Modified)');
+          }
         },
         error: (err) => {
           console.error('Error fetching achievement details:', err);
