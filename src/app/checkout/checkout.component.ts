@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { CartService } from '../cart.service';
 import { CheckoutService } from '../checkout.service';
 import { Router } from '@angular/router';
+import { environment } from '../environment';
 
 interface CartItem {
   product: { name: string; price: number; imagePaths: string[] };
@@ -79,7 +80,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCurrentUsername(): void {
-    this.http.get<any>('http://localhost:8081/api/users/current-user', { withCredentials: true }).subscribe({
+    this.http.get<any>(`${environment.apiBaseUrl}/api/users/current-user`, { withCredentials: true }).subscribe({
       next: (response) => {
         this.orderDetails.email = typeof response === 'string' ? response : response.email || response.username || '';
         console.log('Current user:', this.orderDetails.email);
@@ -108,7 +109,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   loadSavedAddresses(): void {
-    this.http.get<Address[]>('http://localhost:8081/api/addresses', { withCredentials: true }).subscribe({
+     this.http.get<Address[]>(`${environment.apiBaseUrl}/api/addresses`,  { withCredentials: true }).subscribe({
       next: (response) => {
         this.savedAddresses = response;
       },
