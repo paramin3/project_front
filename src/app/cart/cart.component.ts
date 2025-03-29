@@ -14,7 +14,10 @@ import { environment } from '../environment';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
-
+  
+getProductImageUrl(imagePath: string): string {
+  return `${environment.apiBaseUrl}/uploads/images/products/${imagePath}`;
+}
   constructor(
     private cartService: CartService,
     private productService: ProductService, 
