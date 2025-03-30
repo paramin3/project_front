@@ -1,4 +1,3 @@
-<!-- src/app/checkout/checkout.component.html -->
 <div id="checkout-form">
   <h1>ชำระเงิน</h1>
 
@@ -12,15 +11,16 @@
         class="product-image"
         (error)="onImageError($event)"
       />
-      <p>{{ item.product.name }} - {{ item.product.price | number:'1.2-2' }} ฿ x {{ item.quantity }}</p>
+      <p>
+        {{ item.product.name }} - {{ item.product.price | number: '1.2-2' }} ฿ x {{ item.quantity }}
+      </p>
     </div>
   </div>
 
-  <h3 id="total-price">ราคารวม: {{ totalPrice | number:'1.2-2' }} ฿</h3>
-
-  <img src="assets/qr.jpg" alt="QrcodeImage" class="qr-code" />
+  <h3 id="total-price">ราคารวม: {{ totalPrice | number: '1.2-2' }} ฿</h3>
 
   <form #checkoutForm="ngForm" (ngSubmit)="submitOrder()">
+    <!-- ข้อมูลผู้ซื้อ -->
     <div class="form-group">
       <label for="name">ชื่อ:</label>
       <input
@@ -96,12 +96,15 @@
         >
           <option value="new">ป้อนที่อยู่ใหม่</option>
           <option *ngFor="let address of savedAddresses" [value]="address.id">
-            {{ address.name }} - {{ address.homeAddress }}, {{ address.city }}, {{ address.district }}, {{ address.subDistrict }}, {{ address.road || '' }}, {{ address.soi || '' }}, {{ address.moo || '' }}, {{ address.postcode }}
+            {{ address.name }} - {{ address.homeAddress }}, {{ address.city }},
+            {{ address.district }}, {{ address.subDistrict }}, {{ address.road || '' }},
+            {{ address.soi || '' }}, {{ address.moo || '' }}, {{ address.postcode }}
           </option>
         </select>
       </div>
 
       <div id="new-address-fields" *ngIf="selectedAddressId === 'new'">
+        <!-- รายละเอียดที่อยู่ใหม่ -->
         <div class="form-group">
           <label for="homeAddress">บ้านเลขที่:</label>
           <input
@@ -194,8 +197,18 @@
       </div>
     </div>
 
-    <!-- Checkbox ยืนยันก่อน -->
-    <div class="form-group">
+    <!-- QR และช่องแนบสลิป: แสดงเมื่อ checkbox ถูกติ๊ก -->
+    <div class="form-group" *ngIf="isDataConfirmed">
+      <img src="assets/qr.jpg" alt="QrcodeImage" class="qr-code" />
+      <label for="receipt">อัปโหลดใบเสร็จรับเงิน:</label>
+      <input type="file" id="receipt" (change)="onFileChange($event)" />
+      <div *ngIf="receiptError" class="error-message">
+        <small>{{ receiptError }}</small>
+      </div>
+    </div>
+
+    <!-- Checkbox + ปุ่ม submit อยู่ในบรรทัดเดียว -->
+    <div class="form-group confirm-row">
       <input
         type="checkbox"
         id="confirmData"
@@ -204,18 +217,10 @@
         required
       />
       <label for="confirmData">ฉันได้ตรวจสอบข้อมูลครบถ้วนแล้ว</label>
-    </div>
 
-    <!-- ช่องแนบสลิป แสดงเมื่อ checkbox ถูกติ๊ก -->
-    <div class="form-group" *ngIf="isDataConfirmed">
-      <label for="receipt">อัปโหลดใบเสร็จรับเงิน:</label>
-      <input type="file" id="receipt" (change)="onFileChange($event)" />
-      <div *ngIf="receiptError" class="error-message">
-        <small>{{ receiptError }}</small>
-      </div>
+      <button type="submit" [disabled]="isSubmitting || !isDataConfirmed">
+        ยืนยันคำสั่งซื้อ
+      </button>
     </div>
-
-    <!-- ปุ่ม Submit -->
-    <button id="submit-button" type="submit" [disabled]="isSubmitting">ยืนยันคำสั่งซื้อ</button>
   </form>
 </div>
