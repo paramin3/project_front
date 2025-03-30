@@ -35,13 +35,20 @@ export class UserService {
     });
   }
 
-  getCurrentUser(): Observable<string> {
-    return this.http.get(`${this.baseUrl}/api/users/current-user`, { 
-      responseType: 'text',
-      headers: { 'Authorization': `Bearer ${this.getToken()}` },
-      withCredentials: true 
-    });
-  }
+getCurrentUser(): Observable<string> {
+  return this.http.get(`${this.baseUrl}/api/users/current-user`, { 
+    responseType: 'text',
+    withCredentials: true // Sends JSESSIONID cookie
+  }).pipe(
+    catchError(error => {
+      console.error('Error fetching current user:', error);
+      if (error.status === 401) {
+        this.logout(); // Clear session if unauthorized
+      }
+      return throwError(() => new Error('Failed to fetch current user'));
+    })
+  );
+}
 
   logout(): Observable<boolean> {
     return this.http.post(`${this.baseUrl}/api/users/logout`, {}, {
