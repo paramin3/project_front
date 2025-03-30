@@ -20,16 +20,17 @@ private baseUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) {
     this.checkLoginState(); // ตรวจสอบสถานะการเข้าสู่ระบบเมื่อเริ่มต้น
   }
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(this.loginUrl, { email, password }, { withCredentials: true })
-      .pipe(
-        tap(() => {
-          this.setLoginState(true);
-        })
-      );
-  }
-
+  
+login(email: string, password: string): Observable<any> {
+  console.log('Logging in to:', this.loginUrl);
+  return this.http.post<any>(this.loginUrl, { email, password }, { withCredentials: true })
+    .pipe(
+      tap(response => {
+        console.log('Login response:', response);
+        this.setLoginState(true);
+      })
+    );
+}
   logout(): Observable<any> {
     return this.http.post<any>(this.logoutUrl, {}, { withCredentials: true })
       .pipe(
