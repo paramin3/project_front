@@ -68,7 +68,7 @@ export class CheckoutComponent implements OnInit {
   receiptFile: File | null = null;
   receiptError: string | null = null;
   isSubmitting = false;
-  isDataConfirmed: boolean = false; // ✅ เพิ่มตัวแปร checkbox
+  isDataConfirmed: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -175,7 +175,7 @@ export class CheckoutComponent implements OnInit {
       return false;
     }
 
-    if (!this.isDataConfirmed) { // ✅ เพิ่มเงื่อนไขว่าต้องติ๊ก checkbox ก่อน
+    if (!this.isDataConfirmed) {
       alert('กรุณายืนยันว่าคุณได้ตรวจสอบข้อมูลครบถ้วนแล้ว');
       return false;
     }
