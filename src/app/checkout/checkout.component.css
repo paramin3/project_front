@@ -193,7 +193,33 @@ h1 {
     padding: 5px 10px;
     border-radius: 5px;
 }
+.confirm-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
+.confirm-row label {
+    margin: 0;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+.confirm-row input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.confirm-row #submit-button {
+    width: auto;
+    margin-top: 0;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     #checkout-form {
