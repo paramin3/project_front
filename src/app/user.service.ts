@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators'; 
 import { environment } from './environment';
+import { catchError } from 'rxjs/operators';
 
 interface LoginResponse {
   message: string;
