@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment';
+import { AchievementService } from '../achievement.service';
 
 @Component({
   selector: 'app-home',
