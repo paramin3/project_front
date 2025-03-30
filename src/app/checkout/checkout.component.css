@@ -209,6 +209,7 @@ h1 {
   font-size: 1.05rem;
   font-weight: 500;
   cursor: pointer;
+  white-space: nowrap;
 }
 .confirm-label input[type="checkbox"] {
   transform: scale(1.2);
