@@ -213,6 +213,7 @@ h1 {
 .confirm-label input[type="checkbox"] {
   transform: scale(1.2);
   cursor: pointer;
+  width: auto;
 }
 
 /* Responsive Design */
