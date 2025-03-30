@@ -29,8 +29,6 @@
   <label for="postcode">รหัสไปรษณีย์:</label>
   <input id="postcode" type="text" [(ngModel)]="addressForm.postcode" name="postcode" required>
 
-  <label for="isDefault">ตั้งเป็นค่าเริ่มต้น:</label>
-  <input id="isDefault" type="checkbox" [(ngModel)]="addressForm.isDefault" name="isDefault">
 
   <button type="submit">บันทึก</button>
   <button type="button" id="cancel-edit" (click)="resetForm()" *ngIf="editingAddressId">Cancel</button>
