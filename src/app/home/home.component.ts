@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AchievementService } from '../achievement.service'; // Adjust path as needed
+import { AchievementService } from '../achievement.service'; // Adjust path
 import { environment } from '../environment';
 
-// Define the Achievement interface (can move to a separate file)
+// Define the Achievement interface with explicit properties
 interface Achievement {
   id: number;
-  createdAt: string; // Adjust based on your backend response
-  [key: string]: any; // Add other properties as needed
+  createdAt: string | Date; // Allow both string (from backend) and Date (after transformation)
+  imagePaths?: string[]; // Optional array of image paths
+  name?: string; // Optional name
+  title?: string; // Optional title
 }
 
 @Component({
@@ -26,15 +28,13 @@ export class HomeComponent implements OnInit {
   loadAchievements() {
     this.achievementService.getAllAchievements().subscribe({
       next: (data: Achievement[]) => {
-        this.achievements = data
-          .map((achievement: Achievement) => ({
-            ...achievement,
-            createdAt: new Date(achievement.createdAt)
-          }))
-          .sort((a: Achievement, b: Achievement) => b.id - a.id);
+        this.achievements = data.map((achievement: Achievement) => ({
+          ...achievement,
+          createdAt: new Date(achievement.createdAt) // Transform string to Date
+        })).sort((a: Achievement, b: Achievement) => b.id - a.id);
         console.log('Achievements loaded:', this.achievements);
       },
-      error: (error: any) => { // You can refine this type if needed (e.g., HttpErrorResponse)
+      error: (error: any) => {
         console.error('Error loading achievements:', error);
       },
       complete: () => {
