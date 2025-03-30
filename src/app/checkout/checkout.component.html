@@ -84,6 +84,7 @@
       </div>
     </div>
 
+    <!-- ที่อยู่จัดส่ง -->
     <div id="shipping-fields" class="shipping-info" *ngIf="orderDetails.deliveryType === 'shipping'">
       <div class="form-group">
         <label for="saved-addresses">เลือกที่อยู่ที่บันทึกไว้:</label>
@@ -178,47 +179,43 @@
 
         <div class="form-group">
           <label for="road">ถนน:</label>
-          <input
-            type="text"
-            id="road"
-            [(ngModel)]="newAddress.road"
-            name="road"
-            placeholder="ถนน"
-          />
+          <input type="text" id="road" [(ngModel)]="newAddress.road" name="road" placeholder="ถนน" />
         </div>
 
         <div class="form-group">
           <label for="soi">ซอย:</label>
-          <input
-            type="text"
-            id="soi"
-            [(ngModel)]="newAddress.soi"
-            name="soi"
-            placeholder="ซอย"
-          />
+          <input type="text" id="soi" [(ngModel)]="newAddress.soi" name="soi" placeholder="ซอย" />
         </div>
 
         <div class="form-group">
           <label for="moo">หมู่:</label>
-          <input
-            type="text"
-            id="moo"
-            [(ngModel)]="newAddress.moo"
-            name="moo"
-            placeholder="หมู่"
-          />
+          <input type="text" id="moo" [(ngModel)]="newAddress.moo" name="moo" placeholder="หมู่" />
         </div>
       </div>
     </div>
 
+    <!-- Checkbox ยืนยันก่อน -->
     <div class="form-group">
-      <label for="receipt">อัพโหลดใบเสร็จรับเงิน:</label>
-      <input type="file" id="receipt" (change)="onFileChange($event)" required />
+      <input
+        type="checkbox"
+        id="confirmData"
+        [(ngModel)]="isDataConfirmed"
+        name="confirmData"
+        required
+      />
+      <label for="confirmData">ฉันได้ตรวจสอบข้อมูลครบถ้วนแล้ว</label>
+    </div>
+
+    <!-- ช่องแนบสลิป แสดงเมื่อ checkbox ถูกติ๊ก -->
+    <div class="form-group" *ngIf="isDataConfirmed">
+      <label for="receipt">อัปโหลดใบเสร็จรับเงิน:</label>
+      <input type="file" id="receipt" (change)="onFileChange($event)" />
       <div *ngIf="receiptError" class="error-message">
         <small>{{ receiptError }}</small>
       </div>
     </div>
 
+    <!-- ปุ่ม Submit -->
     <button id="submit-button" type="submit" [disabled]="isSubmitting">ยืนยันคำสั่งซื้อ</button>
   </form>
 </div>
