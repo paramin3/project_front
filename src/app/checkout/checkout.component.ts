@@ -1,4 +1,3 @@
-// src/app/checkout/checkout.component.ts
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -23,8 +22,8 @@ interface Address {
   district: string;
   city: string;
   postcode: string;
-  default?: boolean; // Changed from isDefault to default
-  user?: any; // Added to match server's known properties
+  default?: boolean;
+  user?: any;
 }
 
 @Component({
@@ -36,10 +35,11 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('checkoutForm') checkoutForm!: NgForm;
   @ViewChild('shippingFields') shippingFields!: ElementRef<HTMLElement>;
   @ViewChild('newAddressFields') newAddressFields!: ElementRef<HTMLElement>;
-  
-getProductImageUrl(imagePath: string): string {
-  return `${environment.apiBaseUrl}/uploads/images/products/${imagePath}`;
-}
+
+  getProductImageUrl(imagePath: string): string {
+    return `${environment.apiBaseUrl}/uploads/images/products/${imagePath}`;
+  }
+
   orderDetails = {
     name: '',
     surname: '',
@@ -58,7 +58,7 @@ getProductImageUrl(imagePath: string): string {
     district: '',
     city: '',
     postcode: '',
-    default: false // Changed from isDefault to default
+    default: false
   };
 
   cartItems: CartItem[] = [];
@@ -68,6 +68,7 @@ getProductImageUrl(imagePath: string): string {
   receiptFile: File | null = null;
   receiptError: string | null = null;
   isSubmitting = false;
+  isDataConfirmed: boolean = false; // ✅ เพิ่มตัวแปร checkbox
 
   constructor(
     private http: HttpClient,
@@ -112,7 +113,7 @@ getProductImageUrl(imagePath: string): string {
   }
 
   loadSavedAddresses(): void {
-     this.http.get<Address[]>(`${environment.apiBaseUrl}/api/addresses`,  { withCredentials: true }).subscribe({
+    this.http.get<Address[]>(`${environment.apiBaseUrl}/api/addresses`, { withCredentials: true }).subscribe({
       next: (response) => {
         this.savedAddresses = response;
       },
@@ -174,6 +175,11 @@ getProductImageUrl(imagePath: string): string {
       return false;
     }
 
+    if (!this.isDataConfirmed) { // ✅ เพิ่มเงื่อนไขว่าต้องติ๊ก checkbox ก่อน
+      alert('กรุณายืนยันว่าคุณได้ตรวจสอบข้อมูลครบถ้วนแล้ว');
+      return false;
+    }
+
     if (!this.receiptFile) {
       this.receiptError = 'กรุณาอัปโหลดภาพใบเสร็จ';
       return false;
@@ -223,14 +229,13 @@ getProductImageUrl(imagePath: string): string {
       }
     }
 
-if (this.receiptFile) {
-  const originalExtension = this.receiptFile.name.split('.').pop();
-  const newFileName = `receipt_${Date.now()}.${originalExtension}`;
-  const renamedFile = new File([this.receiptFile], newFileName, { type: this.receiptFile.type });
-  formData.append('receiptImage', renamedFile);
-}
+    if (this.receiptFile) {
+      const originalExtension = this.receiptFile.name.split('.').pop();
+      const newFileName = `receipt_${Date.now()}.${originalExtension}`;
+      const renamedFile = new File([this.receiptFile], newFileName, { type: this.receiptFile.type });
+      formData.append('receiptImage', renamedFile);
+    }
 
-    // Log FormData contents manually
     const logFormData = (fd: FormData) => {
       const entries: [string, FormDataEntryValue][] = [];
       fd.forEach((value, key) => entries.push([key, value]));
@@ -273,12 +278,13 @@ if (this.receiptFile) {
       district: '',
       city: '',
       postcode: '',
-      default: false // Changed from isDefault to default
+      default: false
     };
     this.cartItems = [];
     this.totalPrice = 0;
     this.receiptFile = null;
     this.selectedAddressId = 'new';
+    this.isDataConfirmed = false;
     this.checkoutForm.resetForm();
     this.handleDeliveryTypeChange();
   }
