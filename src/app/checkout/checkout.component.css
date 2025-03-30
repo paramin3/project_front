@@ -94,12 +94,7 @@ h1 {
 .qr-code:hover {
     transform: scale(1.02); /* Subtle zoom on hover */
 }
-.confirm-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
+
 /* Total Price Styling */
 #total-price {
     font-weight: bold;
