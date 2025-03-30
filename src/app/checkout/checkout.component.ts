@@ -223,9 +223,12 @@ getProductImageUrl(imagePath: string): string {
       }
     }
 
-    if (this.receiptFile) {
-      formData.append('receiptImage', this.receiptFile);
-    }
+if (this.receiptFile) {
+  const originalExtension = this.receiptFile.name.split('.').pop();
+  const newFileName = `receipt_${Date.now()}.${originalExtension}`;
+  const renamedFile = new File([this.receiptFile], newFileName, { type: this.receiptFile.type });
+  formData.append('receiptImage', renamedFile);
+}
 
     // Log FormData contents manually
     const logFormData = (fd: FormData) => {
