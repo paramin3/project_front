@@ -10,7 +10,7 @@ import { environment } from './environment';
 export class AuthService {
 private baseUrl = environment.apiBaseUrl;
 
-  private loginUrl = `${this.baseUrl}/api/users/login`;
+  private loginUrl = `${this.baseUrl}/users/login`;
   private logoutUrl = `${this.baseUrl}/logout`;
   private userDetailsUrl = `${this.baseUrl}/api/users/current-user`;
   
