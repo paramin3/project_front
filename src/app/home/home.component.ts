@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core'; 
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { AchievementService } from '../achievement.service'; // Adjust path
 import { environment } from '../environment';
-import { AchievementService } from '../achievement.service';
 
 @Component({
   selector: 'app-home',
@@ -10,24 +9,23 @@ import { AchievementService } from '../achievement.service';
 })
 export class HomeComponent implements OnInit {
   achievements: any[] = [];
-  
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private achievementService: AchievementService) {}
 
   ngOnInit() {
     this.loadAchievements();
   }
 
   loadAchievements() {
-    this.http.get<any[]>('/api/achievements').subscribe({
+    this.achievementService.getAllAchievements().subscribe({
       next: (data) => {
-        // แปลง createdAt เป็น Date Object และเรียงลำดับ ID จากมากไปน้อย
         this.achievements = data
           .map(achievement => ({
             ...achievement,
-            createdAt: new Date(achievement.createdAt) // แปลงเป็น Date Object
+            createdAt: new Date(achievement.createdAt)
           }))
           .sort((a, b) => b.id - a.id);
+        console.log('Achievements loaded:', this.achievements);
       },
       error: (error) => {
         console.error('Error loading achievements:', error);
@@ -38,7 +36,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-getImagePath(imagePath: string): string {
-  return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
-}
+  getImagePath(imagePath: string): string {
+    return `${environment.apiBaseUrl}/uploads/images/achievements/${imagePath}`;
+  }
 }
