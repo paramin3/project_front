@@ -14,19 +14,19 @@ export class AchievementService {
     console.log('Base URL in AchievementService:', this.baseUrl);
   }
 
-  getAchievementById(id: string): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`, {
-      withCredentials: true,
-      observe: 'response',
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
-      }
-    }).pipe(
-      catchError(error => {
-        console.error('Raw error from API:', error);
-        return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
-      })
-    );
-  }
+getAchievementById(id: string): Observable<HttpResponse<any>> {
+  return this.http.get<any>(`${this.baseUrl}/${id}`, {
+    withCredentials: true, // Required if endpoint needs auth; optional here since GET is permitAll
+    observe: 'response',
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache'
+    }
+  }).pipe(
+    catchError(error => {
+      console.error('Raw error from API:', error);
+      return throwError(() => new Error(`Error fetching achievement: ${error.message}`));
+    })
+  );
+}
 }
