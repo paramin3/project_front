@@ -29,6 +29,6 @@ addToCart(productId: number): Observable<any> {
   return this.http.post(`${this.cartUrl}/add`, { productId }, { withCredentials: true });
 }
 checkStock(productId: number, quantity: number): Observable<any> {
-  return this.http.get<any>(`/api/products/${productId}/check-stock?quantity=${quantity}`);
+  return this.http.get<any>(`${this.apiUrl}/${productId}/check-stock?quantity=${quantity}`, { withCredentials: true });
 }
 }
