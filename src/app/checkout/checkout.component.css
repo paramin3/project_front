@@ -135,12 +135,6 @@ h1 {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* แก้ไขสำหรับ checkbox โดยเฉพาะ เพื่อให้ไม่ใช้ width 100% */
-#checkout-form input[type="checkbox"] {
-    width: auto;
-    margin-left: 10px;
-}
-
 #checkout-form input:focus,
 #checkout-form select:focus {
     border-color: #007bff;
@@ -199,7 +193,6 @@ h1 {
     padding: 5px 10px;
     border-radius: 5px;
 }
-
 .confirm-row {
   display: flex;
   align-items: center;
@@ -222,7 +215,6 @@ h1 {
   cursor: pointer;
   width: auto;
 }
-
 /* Responsive Design */
 @media (max-width: 768px) {
     #checkout-form {
