@@ -208,19 +208,23 @@
     </div>
 
     <!-- Checkbox + ปุ่ม submit อยู่ในบรรทัดเดียว -->
-    <div class="form-group confirm-row">
-      <input
-        type="checkbox"
-        id="confirmData"
-        [(ngModel)]="isDataConfirmed"
-        name="confirmData"
-        required
-      />
-      <label for="confirmData">ฉันได้ตรวจสอบข้อมูลครบถ้วนแล้ว</label>
+<div class="form-group confirm-row">
+  <input
+    type="checkbox"
+    id="confirmData"
+    [(ngModel)]="isDataConfirmed"
+    name="confirmData"
+    required
+  />
+  <label for="confirmData">ฉันได้ตรวจสอบข้อมูลครบถ้วนแล้ว</label>
 
-      <button type="submit" [disabled]="isSubmitting || !isDataConfirmed">
-        ยืนยันคำสั่งซื้อ
-      </button>
+  <button
+    id="submit-button"
+    type="submit"
+    [disabled]="isSubmitting || !isDataConfirmed"
+  >
+    ยืนยันคำสั่งซื้อ
+  </button>
     </div>
   </form>
 </div>
