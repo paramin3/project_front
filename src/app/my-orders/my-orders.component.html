@@ -4,7 +4,7 @@
     <p>รหัสคำสั่งซื้อ: {{ order.id }}</p>
     <p>ยอดรวม: {{ order.totalAmount | currency:'THB' }}</p>
    <p *ngIf="order.orderDate">
-  <p>วันที่สั่งซื้อ: {{ formatThaiDate(order.orderDate) }}</p>
+  <p>วันที่สั่งซื้อ: {{ formatThaiDate(order.orderDate) }}
 </p>
 
     <h3>รายการสินค้า</h3>
