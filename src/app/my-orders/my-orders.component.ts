@@ -12,6 +12,23 @@ export class MyOrdersComponent implements OnInit {
   currentEmail: string | null = null;
 
   constructor(private http: HttpClient) {}
+  
+formatThaiDate(dateStr: string | null): string {
+  if (!dateStr) return 'N/A';
+
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return 'Invalid Date';
+
+  return date.toLocaleString('th-TH', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Asia/Bangkok'
+  });
+}
 
   ngOnInit(): void {
     // เรียก API เพื่อดึง email
