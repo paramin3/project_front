@@ -3,7 +3,9 @@
   <div *ngFor="let order of orders" class="order-item">
     <p>รหัสคำสั่งซื้อ: {{ order.id }}</p>
     <p>ยอดรวม: {{ order.totalAmount | currency:'THB' }}</p>
-   <p>วันที่สั่งซื้อ: {{ order.orderDate | date:'dd/MM/yyyy HH:mm':'':'Asia/Bangkok' }}</p>
+   <p *ngIf="order.orderDate">
+  วันที่สั่งซื้อ: {{ order.orderDate | date:'dd/MM/yyyy HH:mm':'':'Asia/Bangkok' }}
+</p>
 
     <h3>รายการสินค้า</h3>
     <div *ngFor="let orderItem of order.orderItems" class="order-item-detail">
