@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressService } from '../address.service'; // Adjusted path
 import { Address } from '../address.model';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-address-management',
@@ -24,23 +25,24 @@ export class AddressManagementComponent implements OnInit {
     isDefault: false
   };
 
-  constructor(private addressService: AddressService) {}
+  constructor(private addressService: AddressService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadAddresses();
   }
 
-  loadAddresses(): void {
-    this.addressService.getAddresses().subscribe({
-      next: (addresses: Address[]) => {
-        this.addresses = addresses;
-      },
-      error: (error: any) => {
-        console.error('Error loading addresses:', error);
-        alert('กรุณาเข้าสู่ระบบเพื่อทำการบันทึกข้อมูล');
-      }
-    });
-  }
+loadAddresses(): void {
+  this.addressService.getAddresses().subscribe({
+    next: (addresses: Address[]) => {
+      this.addresses = addresses;
+    },
+    error: (error: any) => {
+      console.error('Error loading addresses:', error);
+      alert('กรุณาเข้าสู่ระบบเพื่อทำการบันทึกข้อมูล');
+      this.router.navigate(['/login']); // ← Redirect ไปที่หน้า login
+    }
+  });
+}
 
   editAddress(id: number): void {
     this.addressService.getAddressById(id).subscribe({
